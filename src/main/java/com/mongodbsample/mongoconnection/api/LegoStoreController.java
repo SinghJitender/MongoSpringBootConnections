@@ -87,4 +87,11 @@ public class LegoStoreController {
     return legoSetRepository.findAllByDeliveryPriceLessThan(price);
   }
 
+  @GetMapping("byProductReviews/{ratings}")
+  public Collection<LegoSet> byProductReviews(@PathVariable int ratings) {
+    return legoSetRepository.findAllByProductRatings(ratings);
+  }
+
+
+
 }
