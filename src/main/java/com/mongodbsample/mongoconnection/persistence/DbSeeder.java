@@ -24,7 +24,7 @@ public class DbSeeder implements CommandLineRunner {
   @Override
   public void run(String... args) throws Exception {
 
-    //this.mongoTemplate.dropCollection(LegoSet.class);
+   // this.mongoTemplate.dropCollection(LegoSet.class);
 
     LegoSet milleniumFalcom =  new LegoSet(
       "Millenium Falcom",
@@ -34,7 +34,7 @@ public class DbSeeder implements CommandLineRunner {
       Arrays.asList(
         new ProductReview("Dan",7),
         new ProductReview("Anne",10),
-        new ProductReview("John",8)
+        new ProductReview("John",8.4)
       )
     );
 
@@ -44,8 +44,8 @@ public class DbSeeder implements CommandLineRunner {
       new DeliveryInfo(LocalDate.now().plusDays(7),70, false),
       LegoSetDifficuty.EASY,
       Arrays.asList(
-        new ProductReview("Prachi",9),
-        new ProductReview("Sukhi",9)
+        new ProductReview("Prachi",9.3),
+        new ProductReview("Sukhi",9.9)
       ));
 
     LegoSet skyPolice =  new LegoSet(
@@ -55,7 +55,7 @@ public class DbSeeder implements CommandLineRunner {
       LegoSetDifficuty.MEDIUM,
       Arrays.asList(
         new ProductReview("Dan",5),
-        new ProductReview("Andrew",8)
+        new ProductReview("Andrew",8.2)
       ));
 
     LegoSet mindStromsEve =  new LegoSet(
@@ -64,12 +64,12 @@ public class DbSeeder implements CommandLineRunner {
       new DeliveryInfo(LocalDate.now().plusDays(10),100, false),
       LegoSetDifficuty.HARD,
       Arrays.asList(
-        new ProductReview("Jitu",9),
-        new ProductReview("Mani",7),
-        new ProductReview("Tom",8)
+        new ProductReview("Jitu",9.0),
+        new ProductReview("Mani",7.1),
+        new ProductReview("Tom",8.2)
       ));
 
-    Collection<LegoSet> initialProducts = Arrays.asList(milleniumFalcom,mcLarenSenna,skyPolice,mindStromsEve);
+    //Collection<LegoSet> initialProducts = Arrays.asList(milleniumFalcom,mcLarenSenna,skyPolice,mindStromsEve);
     //this.mongoTemplate.insertAll(initialProducts);
   }
 }

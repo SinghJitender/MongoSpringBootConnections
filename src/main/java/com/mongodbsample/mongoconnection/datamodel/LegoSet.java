@@ -3,7 +3,6 @@ package com.mongodbsample.mongoconnection.datamodel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Transient;

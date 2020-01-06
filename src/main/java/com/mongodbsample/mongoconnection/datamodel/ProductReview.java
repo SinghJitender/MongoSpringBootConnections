@@ -2,9 +2,9 @@ package com.mongodbsample.mongoconnection.datamodel;
 
 public class ProductReview {
   private String userName;
-  private int rating;
+  private double rating;
 
-  public ProductReview(String userName, int rating) {
+  public ProductReview(String userName, double rating) {
     this.userName = userName;
     this.rating = rating;
   }
@@ -13,7 +13,7 @@ public class ProductReview {
     return userName;
   }
 
-  public int getRating() {
+  public double getRating() {
     return rating;
   }
 }
