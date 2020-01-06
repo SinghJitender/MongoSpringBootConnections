@@ -10,10 +10,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("legostore/api")
@@ -130,7 +132,10 @@ public class LegoStoreController {
 
   }
 
-
-
-
+  @GetMapping("fullTextSearch/{text}")
+  public Collection<LegoSet> fullTextSearch(@PathVariable String text){
+    TextCriteria criteria = TextCriteria.forDefaultLanguage().matching(text);
+    return legoSetRepository.findAllBy(criteria);
+  }
+  
 }

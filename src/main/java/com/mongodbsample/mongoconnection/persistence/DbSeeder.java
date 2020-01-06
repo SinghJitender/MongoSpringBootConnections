@@ -4,6 +4,7 @@ import com.mongodbsample.mongoconnection.datamodel.DeliveryInfo;
 import com.mongodbsample.mongoconnection.datamodel.LegoSet;
 import com.mongodbsample.mongoconnection.datamodel.LegoSetDifficuty;
 import com.mongodbsample.mongoconnection.datamodel.ProductReview;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
@@ -11,9 +12,17 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Random;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 public class DbSeeder implements CommandLineRunner {
+
+  @Autowired
+  private LegoSetRepository legoSetRepository;
 
   private MongoTemplate mongoTemplate;
 
@@ -25,6 +34,7 @@ public class DbSeeder implements CommandLineRunner {
   public void run(String... args) throws Exception {
 
    // this.mongoTemplate.dropCollection(LegoSet.class);
+    legoSetRepository.deleteAll();
 
     LegoSet milleniumFalcom =  new LegoSet(
       "Millenium Falcom",
@@ -69,7 +79,8 @@ public class DbSeeder implements CommandLineRunner {
         new ProductReview("Tom",8.2)
       ));
 
-    //Collection<LegoSet> initialProducts = Arrays.asList(milleniumFalcom,mcLarenSenna,skyPolice,mindStromsEve);
+    Collection<LegoSet> initialProducts = Arrays.asList(milleniumFalcom,mcLarenSenna,skyPolice,mindStromsEve);
     //this.mongoTemplate.insertAll(initialProducts);
+    legoSetRepository.insert(initialProducts);
   }
 }

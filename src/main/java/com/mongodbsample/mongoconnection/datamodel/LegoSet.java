@@ -8,6 +8,7 @@ import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -20,6 +21,7 @@ public class LegoSet {
   //@Id defines the ID for the document
   @Id
   private String id;
+  @TextIndexed
   private String name;
   /*
   @Indexed annotation creates an index on theme. Which later processes information fast if we need to filter LegoSets based upon theme.
@@ -28,6 +30,7 @@ public class LegoSet {
   Indexing also helps in retreving data faster but it also slows down when we update,delete or add new data.
   This causes performace degradation in other operations. Just index things that you're going to query alot.
    */
+  @TextIndexed
   @Indexed(direction = IndexDirection.ASCENDING)
   private String theme;
   // @Field() annotation tells mongo that deliveryInfo will be stored with name as "delivery"

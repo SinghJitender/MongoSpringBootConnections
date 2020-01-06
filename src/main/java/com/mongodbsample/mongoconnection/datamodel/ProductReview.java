@@ -1,6 +1,9 @@
 package com.mongodbsample.mongoconnection.datamodel;
 
+import org.springframework.data.mongodb.core.index.TextIndexed;
+
 public class ProductReview {
+  @TextIndexed
   private String userName;
   private double rating;
 
