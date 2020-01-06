@@ -2,7 +2,9 @@ package com.mongodbsample.mongoconnection.api;
 
 import com.mongodbsample.mongoconnection.datamodel.LegoSet;
 import com.mongodbsample.mongoconnection.datamodel.LegoSetDifficuty;
+import com.mongodbsample.mongoconnection.datamodel.QLegoSet;
 import com.mongodbsample.mongoconnection.persistence.LegoSetRepository;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -112,6 +114,20 @@ public class LegoStoreController {
     Sort sortByTheme = Sort.by("theme").ascending();
     return legoSetRepository.findAll(sortByTheme);
     //return template.findAll(LegoSet.class);
+  }
+
+  @GetMapping("bestBuys")
+  public Collection<LegoSet> bestBuys() {
+
+    QLegoSet query = new QLegoSet("query");
+    BooleanExpression inStockFilter = query.deliveryInfo().inStock.isTrue();
+    BooleanExpression deliveryFeeFilter = query.deliveryInfo().deliveryFee.lt(50);
+    BooleanExpression productReviewsFilter = query.productReviews.any().rating.eq(10);
+
+    BooleanExpression bestBuysFilter = inStockFilter.and(deliveryFeeFilter).and(productReviewsFilter);
+
+    return (Collection<LegoSet>) legoSetRepository.findAll(bestBuysFilter);
+
   }
 
 
