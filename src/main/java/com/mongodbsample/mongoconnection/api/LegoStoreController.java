@@ -4,6 +4,7 @@ import com.mongodbsample.mongoconnection.datamodel.LegoSet;
 import com.mongodbsample.mongoconnection.datamodel.LegoSetDifficuty;
 import com.mongodbsample.mongoconnection.persistence.LegoSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -70,6 +71,20 @@ public class LegoStoreController {
     return legoSetRepository.findAllByTheme(theme);
   }
 
+
+  @GetMapping("findByThemeContains/{theme}")
+  public Collection<LegoSet> findByThemeContains(@PathVariable String theme) {
+    //return legoSetRepository.findAllByThemeContains(theme);
+    return legoSetRepository.findAllByThemeContains(theme);
+  }
+
+  @GetMapping("findByThemeSorted/{theme}")
+  public Collection<LegoSet> findByThemeSorted(@PathVariable String theme) {
+    //return legoSetRepository.findAllByThemeContains(theme);
+    Sort sortByTheme = Sort.by("theme").ascending();
+    return legoSetRepository.findAllByThemeContains(theme,sortByTheme);
+  }
+
   @GetMapping("difficulty/{difficulty}")
   public Collection<LegoSet> findByDifficulty(@PathVariable LegoSetDifficuty difficulty) {
     //return legoSetRepository.findAllByThemeContains(theme);
@@ -91,6 +106,14 @@ public class LegoStoreController {
   public Collection<LegoSet> byProductReviews(@PathVariable int ratings) {
     return legoSetRepository.findAllByProductRatings(ratings);
   }
+
+  @GetMapping("/allSortedByTheme")
+  public Collection<LegoSet> getAllSortedByTheme(){
+    Sort sortByTheme = Sort.by("theme").ascending();
+    return legoSetRepository.findAll(sortByTheme);
+    //return template.findAll(LegoSet.class);
+  }
+
 
 
 
