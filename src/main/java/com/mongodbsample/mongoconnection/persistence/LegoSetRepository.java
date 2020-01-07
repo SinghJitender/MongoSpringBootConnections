@@ -24,4 +24,7 @@ public interface LegoSetRepository extends MongoRepository<LegoSet, String>, Que
 
     @Query("{'productReviews.rating' : {$eq : ?0}}")
     Collection<LegoSet> findAllByProductRatings(int rating);
+
+    @Query("{'paymentOptions.id' : ?0 }")
+    Collection<LegoSet> findAllPaymentOptionId(String id);
 }

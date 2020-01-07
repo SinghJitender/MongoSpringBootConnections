@@ -1,18 +1,13 @@
 package com.mongodbsample.mongoconnection;
 
-import com.mongodbsample.mongoconnection.datamodel.DeliveryInfo;
-import com.mongodbsample.mongoconnection.datamodel.LegoSet;
-import com.mongodbsample.mongoconnection.datamodel.LegoSetDifficuty;
-import com.mongodbsample.mongoconnection.datamodel.ProductReview;
+import com.mongodbsample.mongoconnection.datamodel.*;
 import com.mongodbsample.mongoconnection.persistence.LegoSetRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -44,8 +39,8 @@ public class MongoconnectionApplicationTests {
 						new ProductReview("Dan",7),
 						new ProductReview("Anne",10),
 						new ProductReview("John",8.4)
-				)
-		);
+				),
+				new PaymentOptions(PaymentType.CREDIT,0));
 
 		LegoSet mcLarenSenna =  new LegoSet(
 				"McLaren Senna",
@@ -55,7 +50,7 @@ public class MongoconnectionApplicationTests {
 				Arrays.asList(
 						new ProductReview("Prachi",9.3),
 						new ProductReview("Sukhi",9.9)
-				));
+				), new PaymentOptions(PaymentType.CREDIT,0));
 
 		legoSetRepository.insert(milleniumFalcom);
 		legoSetRepository.insert(mcLarenSenna);

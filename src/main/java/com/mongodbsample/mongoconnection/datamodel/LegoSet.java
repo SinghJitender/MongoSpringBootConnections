@@ -9,6 +9,7 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -38,17 +39,21 @@ public class LegoSet {
   private DeliveryInfo deliveryInfo;
   private LegoSetDifficuty legoSetDifficuty;
   private Collection<ProductReview> productReviews = new ArrayList<>();
+  /* Refers to the PaymentOptions Document */
+  @DBRef
+  private PaymentOptions paymentOptions;
 
   /*@PersistenceConstructor annotation is used to specify which constructor
    * to use (in case of multiple constructor) while serializinr
    * or de-serializing objects. This is not needed in case on single constructor */
   @PersistenceConstructor
   public LegoSet(String name, String theme, DeliveryInfo deliveryInfo,
-                 LegoSetDifficuty legoSetDifficuty, Collection<ProductReview> productReviews) {
+                 LegoSetDifficuty legoSetDifficuty, Collection<ProductReview> productReviews, PaymentOptions paymentOptions) {
     this.name = name;
     this.theme = theme;
     this.deliveryInfo = deliveryInfo;
     this.legoSetDifficuty = legoSetDifficuty;
+    this.paymentOptions = paymentOptions;
     if (productReviews != null) {
       this.productReviews = productReviews;
     }
@@ -83,5 +88,9 @@ public class LegoSet {
 
   public int getNbParts() {
     return nbParts;
+  }
+
+  public PaymentOptions getPaymentOptions() {
+    return paymentOptions;
   }
 }
