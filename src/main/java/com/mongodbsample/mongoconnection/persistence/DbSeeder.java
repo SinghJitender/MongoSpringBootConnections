@@ -34,7 +34,7 @@ public class DbSeeder implements CommandLineRunner {
   public void run(String... args) throws Exception {
 
    // this.mongoTemplate.dropCollection(LegoSet.class);
-    legoSetRepository.deleteAll();
+    //legoSetRepository.deleteAll();
 
     LegoSet milleniumFalcom =  new LegoSet(
       "Millenium Falcom",
@@ -79,8 +79,8 @@ public class DbSeeder implements CommandLineRunner {
         new ProductReview("Tom",8.2)
       ));
 
-    Collection<LegoSet> initialProducts = Arrays.asList(milleniumFalcom,mcLarenSenna,skyPolice,mindStromsEve);
+   // Collection<LegoSet> initialProducts = Arrays.asList(milleniumFalcom,mcLarenSenna,skyPolice,mindStromsEve);
     //this.mongoTemplate.insertAll(initialProducts);
-    legoSetRepository.insert(initialProducts);
+    //legoSetRepository.insert(initialProducts);
   }
 }

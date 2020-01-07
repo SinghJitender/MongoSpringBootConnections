@@ -54,7 +54,7 @@ public class LegoSet {
     }
   }
   //@Transient annotation helps in ignoring the field that should not be added to the mongoDB document/collection.
-  @Transient
+  //@Transient
   private int nbParts;
 
   public String getId() {
